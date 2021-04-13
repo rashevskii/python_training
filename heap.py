@@ -11,6 +11,7 @@ class Heap:
     def lift_up(self, i):
         while i != 0 and self.values[i] < self.values[(i - 1) // 2]:
             self.values[i], self.values[(i - 1) // 2] = self.values[(i - 1) // 2], self.values[i]
+            i = (i - 1) // 2
 
     def extract_min(self):
         if not self.size:
@@ -19,7 +20,7 @@ class Heap:
         self.values[0] = self.values[-1]
         self.values.pop()
         self.size -= 1
-        self.lift_down(self.values[0])
+        self.lift_down(0)
         return tmp
 
     def lift_down(self, i):
@@ -32,3 +33,4 @@ class Heap:
             if i == j:
                 break
             self.values[i], self.values[j] = self.values[j], self.values[i]
+            i = j
